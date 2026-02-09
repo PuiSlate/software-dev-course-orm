@@ -4,6 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 public class Contact {
@@ -13,6 +17,9 @@ public class Contact {
     private String name;
     private String email;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -44,6 +51,14 @@ public class Contact {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     public Contact() {
